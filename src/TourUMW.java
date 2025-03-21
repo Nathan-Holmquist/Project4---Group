@@ -16,18 +16,15 @@ public class TourUMW {
         File file;
 
         // File input loop
-        while (true) {
-            file = new File("../data/newInputData.txt");
+        
+        file = new File("../data/newInputData.txt");
 
-            if (!file.exists()){
-                System.out.println("File not found, please try again");
-                System.out.println("Current working directory: " + System.getProperty("user.dir"));
-                System.exit(-1);
-            } else {
-                break;
-            }
-
-        }
+        if (!file.exists()){
+            System.out.println("File not found, please try again");
+            System.out.println("Current working directory: " + System.getProperty("user.dir"));
+            System.exit(-1);
+        } 
+        
         
         // Object Creation
         Scanner fileScanner = new Scanner(file);
@@ -183,6 +180,8 @@ public class TourUMW {
     }
     
 
+
+
     /**
      * This method prompts the user for input and returns a command based on the input
      * 
@@ -200,7 +199,9 @@ public class TourUMW {
             System.out.println("You came with a backpack! If you are at a location with an item, you can pick it up with 'pickup [item name]'");
             System.out.println("You can drop an item at a location with 'drop [item name]'\n");
 
-            System.out.println("You can also just press the first letter of the command, so 'p [item name]' works too");
+            System.out.println("You can also just press the first letter of the command, so 'p [item name]' works too\n");
+
+            System.out.println("Type 'v' or 'verbose' to stop showing 'Doors:' in the menu\n");
 
             System.out.println("You can move to a new location with n/s/e/w ");
             System.out.println("\n\n");
@@ -328,5 +329,10 @@ public class TourUMW {
             e.printStackTrace();
         }
     }
-    
+
+
+
+
+
 }
+
