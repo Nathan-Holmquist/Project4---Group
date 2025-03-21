@@ -1,0 +1,193 @@
+University of Mary Washington
+*****
+Locations:
+Double Drive
+Welcome to the University of Mary Washington! You are 
+currently at the main entrance for the school.
++++
+James Farmer Hall
+This building is named after Dr. James Farmer and houses 
+the Departments of Mathematics, Computer Science, CPR, 
+Education and Asian Studies. It was built in 1941 and was 
+originally the library. An addition was completed in 1963.
++++
+Campus Walk East
+This sidewalk winds through the entire campus leading 
+you to all other locations on campus.
++++
+Bell Tower
+The tower houses a clock and is a monumental piece at UMW 
+built in 2007. The bell chimes twice a day at noon and 6pm.
++++
+George Washington Hall
+This building has all administrators and human resources. 
+It was completed in 1939.
++++
+Combs Hall
+Combs Hall contains the Department of English and Linguistics. 
+It was built in 1959.
++++
+Campus Walk West
+This is the main thoroughfare for the west side of campus.
++++
+For Five Coffee
+Located across from the HCC, For Five Coffee comes to UMW from New York. They
+offer coffees, teas, and a selection of sandwiches and pastries.
++++
+Lee Hall
+Lee Hall houses the bookstore, student services and the health center.
++++
+Bookstore
+The bookstore is for all at UMW. Students can find textbooks and 
+supplies. Everyone can find gear to represent our beloved school!
++++
+Monroe Hall
+Monroe Hall is one of the three original buildings on campus. It was 
+built in 1911. It houses the History, Geography, and Political 
+Science Departments.
++++
+Monroe Fountain
+This fountain is central to the original three buildings of campus. 
+Many students enjoy a refreshing feet dip in spring. You never 
+know what you might find walking by...towering bubbles?
++++
+Simpson Library
+The library is in its second location on campus. It was built in 1987 
+as a replacement to Trinkle (now James Farmer) Library. This library 
+then had space for many student amenities including study spaces 
+and larger book collections. If you need a quiet working space, visit 
+the treehouses on the third floor!
++++
+*****
+Doors:
+Double Drive
+n
+Bell Tower
++++
+Bell Tower
+s
+Double Drive
++++
+Double Drive
+e
+Combs Hall
++++
+Combs Hall
+w
+Double Drive
++++
+Double Drive
+w
+George Washington Hall
++++
+George Washington Hall
+e
+Double Drive
++++
+Bell Tower
+w
+Campus Walk East
++++
+Campus Walk East
+e
+Bell Tower
++++
+Campus Walk East
+n
+James Farmer Hall
++++
+James Farmer Hall
+s
+Campus Walk East
++++
+Campus Walk East
+w
+Campus Walk West
++++
+Campus Walk West
+e
+Campus Walk East
++++
+Campus Walk West
+n
+Lee Hall
++++
+Lee Hall
+s
+Campus Walk West
++++
+Lee Hall
+n
+Bookstore
++++
+Bookstore
+s
+Lee Hall
++++
+Campus Walk West
+w
+Monroe Fountain
++++
+Monroe Fountain
+e
+Campus Walk West
++++
+Monroe Fountain
+n
+Monroe Hall
++++
+Monroe Hall
+s
+Monroe Fountain
++++
+Monroe Fountain
+s
+Simpson Library
++++
+Simpson Library
+n
+Monroe Fountain
++++
+Simpson Library
+w
+For Five Coffee
++++
+For Five Coffee
+e
+Simpson Library
++++
+*****
+Items:
+coffee
+For Five Coffee
+The latte of the day is a black raspberry mocha.
++++
+Donut
+For Five Coffee
+Freshly made by local Freddy Donuts!
++++
+The Design of Everyday Things book
+Simpson Library
+The science of quality product design, why do we love some products, but are frustrated by others?
++++
+UMW baseball hat
+Bookstore
+Show that school spirit!
++++
+UMW hoodie
+Bookstore
+Get cozy on Ball Circle and watch the leaves turn color!
++++
+Little Brother book
+Simpson Library
+Enjoy reading!
++++
+Linux laptop
+James Farmer Hall
+You can loan a linux laptop for your assignment this semester, and return it once you are done.
++++
+Scone
+For Five Coffee
+Today we are serving chocolate chip scones!
++++
+*****
