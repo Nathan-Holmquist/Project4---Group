@@ -66,6 +66,10 @@ public class Location {
     void setName(String name){
         this.name = name;
     }
+
+    boolean getHaveVisited() {
+        return this.haveVisited;
+    }
     /**
      * Sets discription
      * @param desc discription
@@ -131,6 +135,10 @@ public class Location {
      */
     void addDoor(Door door){
         this.doors.add(door);
+    }
+
+    void setVisited(boolean visited){
+        this.haveVisited = visited;
     }
 
     // Adds item to items array

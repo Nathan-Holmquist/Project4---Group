@@ -1,0 +1,20 @@
+SAVE FILE
+*****
+Location states:
+Double Drive
+visited:true
++++
+Bell Tower
+visited:true
++++
+Katora Coffee
+items:coffee,Pop Tart
++++
+Bookstore
+items:UMW baseball hat,UMW hoodie
++++
+*****
+Visitor:
+current location:Bell Tower
+backpack:Little Brother book,scone
+*****

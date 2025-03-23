@@ -12,14 +12,16 @@ import java.util.Scanner;
  */
 public class TourUMW {
     public static void main(String[] args) throws FileNotFoundException{
-        Scanner scanner = new Scanner(System.in);
-        File file;
+
+        File inputFile;
+        File saveFile;
 
         // File input loop
-        
-        file = new File("../data/newInputData.txt");
+        inputFile = new File("../data/newInputData.txt");
+        saveFile = new File("../data/saveInputData.txt");
 
-        if (!file.exists()){
+        // Check if inputFile exists, if not, exit the program
+        if (!inputFile.exists()){
             System.out.println("File not found, please try again");
             System.out.println("Current working directory: " + System.getProperty("user.dir"));
             System.exit(-1);
@@ -27,13 +29,15 @@ public class TourUMW {
         
         
         // Object Creation
-        Scanner fileScanner = new Scanner(file);
+        Scanner scanner = new Scanner(System.in);
+        Scanner inputFileScanner = new Scanner(inputFile);
+        Scanner saveFileScanner = new Scanner(saveFile);
         TourStatus tourStatus = TourStatus.getInstance();
         TourUMW tourUmw = new TourUMW();
         boolean firstRun = true;
 
         // Setting up campus
-        Campus campus = tourUmw.setUpCampus(fileScanner);
+        Campus campus = tourUmw.setUpCampus(inputFileScanner);
         tourStatus.setCampus(campus);
         tourStatus.setCurrentLocation(campus.getStartLocation());
 
@@ -52,7 +56,8 @@ public class TourUMW {
     /**
      * This method parses the input file and creates a new "Campus" object complete with the information from the file
      * 
-     * @param fileScanner
+     * @param fileScanner input file scanner
+     * @param saveScanner save file scanner
      * @return campus
      * @throws FileNotFoundException
      */
@@ -61,7 +66,6 @@ public class TourUMW {
 
         Campus campus = new Campus();
         String line;
-        int itemCount = 0;
         int itemStepCount = 0;
         int starCount = 0;
         boolean discription = false;
@@ -69,17 +73,12 @@ public class TourUMW {
         String locationDesc = "";
         ArrayList<Location> locations = new ArrayList<Location>();
         int locationCount = 0;
-        boolean startingLocation = true;
-        boolean descHasHappened = false;
-        int totalDoorCount = 1; // This includes doors going both ways, so if you want number of doors divide by 2
         int doorStepCount = 0;
         Location currentLocation = null;
         Door door = null;
         Item item = null;
-        String doorLocationName = ""; // This is to keep track of the Location object that a door belongs to while in the door data in the input file
-        String itemLocationName = "";
-        int isStartingLocation = 0;
-        // I need the array list to dynamically add Location objects. 
+        String doorLocationName = ""; // This is to keep track of the Location object that a door belongs to while in the door data of the input file
+       
 
         while (fileScanner.hasNextLine()){
             line = fileScanner.nextLine().toLowerCase();
@@ -118,7 +117,6 @@ public class TourUMW {
                         // Location can be multiple lines so we need to concatinate them 
                         // this will result in more calls to the object but I don't think thats really a problem rn
                         currentLocation.setDescription(locationDesc);
-                        descHasHappened = true;
                         
                     }
                 }
@@ -128,7 +126,7 @@ public class TourUMW {
                 if (line.contains("doors:")){ // If line is Doors: it can be ignored
                     ;
                 } else if (line.contains("+++")){ // if line is +++ this means there is a new door object coming
-                    totalDoorCount++;
+                    ;
                 } else { // There are three steps, entering location, the direction the door faces, exiting location
                     
                     if (doorStepCount == 0){ // ENTERING LOCATION
@@ -151,9 +149,9 @@ public class TourUMW {
             } else if (starCount == 3) { // Items
                 
                 if (line.contains("items:")) { // If line is "Items:", ignore it
-                    itemCount++;
+                    ;
                 } else if (line.contains("+++")) { // If line is "+++", a new item object is coming
-                    itemCount++;
+                    ;
                 } else { // Three steps: item name, item location, item description
 
                     if (itemStepCount == 0) { // ENTERING NAME
@@ -179,7 +177,49 @@ public class TourUMW {
         return campus;
     }
     
+    void readSaveFile(Scanner saveScanner){
 
+        String line = saveScanner.nextLine();
+        // SAVE FILE PART
+
+        int saveStarCount = 0;
+        int locationPart = 0;
+        Location location;
+        TourStatus tourStatus = TourStatus.getInstance();
+        Campus campus = tourStatus.getCampus();
+
+        while(saveScanner.hasNextLine()){
+            line = saveScanner.nextLine().toLowerCase(); // Remember, everything is lowercase, keep everything lowercase.
+
+            if (line.contains("save file")) { // Skip save file declaration
+                ;
+            } else if (line.contains("*****")) { // Stars mean switching to new object
+                saveStarCount++;
+            } else if (line.contains("+++")) { // New object of same type
+                ;
+            } else { // Change the object's state depending on what it is
+
+                if (saveStarCount == 1){ // LOCATION STATES
+                    String locationNameSave = line;
+                    location = tourStatus.getCampus().getLocation(line);
+
+                    System.out.println(location.getHaveVisited());
+                    
+                    if (line.startsWith("visited:")) {
+                        if (line.endsWith("true")){
+                            location.setVisited(true);
+                        }
+                    } else if (line.startsWith("items:")){
+                        ;
+                    }
+
+                } else if (saveStarCount == 2){
+                    ;
+                }
+            }
+
+        }
+    }
 
 
     /**
