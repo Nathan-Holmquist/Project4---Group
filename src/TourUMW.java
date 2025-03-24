@@ -240,6 +240,7 @@ public class TourUMW {
         // Handle movement commands
         if (userLine.equals("n") || userLine.equals("s") || userLine.equals("e") || userLine.equals("w")) {
             clearScreen();
+            tourStatus.addToDistance();
             return new MovementCommand(userLine);
         }
     
@@ -289,6 +290,11 @@ public class TourUMW {
         if (userLine.equals("Verbose ") || userLine.equals("v")) {
             clearScreen();
             return new VerboseCommand();
+        }
+
+        if (userLine.equals("d") || userLine.equals("distance")){
+            clearScreen();
+            return new DistanceCommand();
         }
         
         // If input is invalid, return an InvalidCommand

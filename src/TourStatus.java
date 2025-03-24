@@ -13,6 +13,7 @@ public class TourStatus{
     private String currentLocationString;
     private ArrayList<Item> backpack;
     private static TourStatus instance;     
+    private int distance;
 
     /**
      * No param constructor for TourStatus
@@ -20,6 +21,7 @@ public class TourStatus{
     private TourStatus(){
         this.backpack = new ArrayList<Item>();
         this.isVerboseMode = false;
+        this.distance = 0;
     }
 
 
@@ -106,6 +108,8 @@ public class TourStatus{
         }  
         return instance;
     }
+
+
     
     /**
      * Updates the tour location
@@ -148,5 +152,13 @@ public class TourStatus{
         }
 
         return list;
+    }
+
+    void addToDistance(){
+        this.distance += 1;
+    }
+    
+    int getDistance(){
+        return this.distance;
     }
 }
