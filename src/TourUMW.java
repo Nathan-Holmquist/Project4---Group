@@ -17,7 +17,9 @@ public class TourUMW {
 
         // File input loop
         while (true) {
-            file = new File("../data/newInputData.txt");
+
+            file = new File("data/newInputData.txt"); 
+            // This should work for all operating systems, if you are on windows replace '/' with '\\'
 
             if (!file.exists()){
                 System.out.println("File not found, please try again");
