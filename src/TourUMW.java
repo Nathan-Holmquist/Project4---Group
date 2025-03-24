@@ -19,7 +19,7 @@ public class TourUMW {
         while (true) {
 
             file = new File("data/newInputData.txt"); 
-            // This should work for all operating systems, if you are on windows replace '/' with '\\'
+            // This should work for all operating systems, if you are on windows replace '/' with '\\'  figure out what works for ur setup
 
             if (!file.exists()){
                 System.out.println("File not found, please try again");
@@ -66,7 +66,6 @@ public class TourUMW {
 
         Campus campus = new Campus();
         String line;
-        int itemCount = 0;
         int itemStepCount = 0;
         int starCount = 0;
         boolean discription = false;
@@ -74,16 +73,12 @@ public class TourUMW {
         String locationDesc = "";
         ArrayList<Location> locations = new ArrayList<Location>();
         int locationCount = 0;
-        boolean startingLocation = true;
-        boolean descHasHappened = false;
-        int totalDoorCount = 1; // This includes doors going both ways, so if you want number of doors divide by 2
         int doorStepCount = 0;
         Location currentLocation = null;
         Door door = null;
         Item item = null;
         String doorLocationName = ""; // This is to keep track of the Location object that a door belongs to while in the door data in the input file
         String itemLocationName = "";
-        int isStartingLocation = 0;
         // I need the array list to dynamically add Location objects. 
 
         while (fileScanner.hasNextLine()){
@@ -123,17 +118,15 @@ public class TourUMW {
                         // Location can be multiple lines so we need to concatinate them 
                         // this will result in more calls to the object but I don't think thats really a problem rn
                         currentLocation.setDescription(locationDesc);
-                        descHasHappened = true;
                         
                     }
                 }
             } else if (starCount == 2){ // Doors
 
-                
                 if (line.contains("doors:")){ // If line is Doors: it can be ignored
                     ;
                 } else if (line.contains("+++")){ // if line is +++ this means there is a new door object coming
-                    totalDoorCount++;
+                    continue;
                 } else { // There are three steps, entering location, the direction the door faces, exiting location
                     
                     if (doorStepCount == 0){ // ENTERING LOCATION
@@ -156,9 +149,9 @@ public class TourUMW {
             } else if (starCount == 3) { // Items
                 
                 if (line.contains("items:")) { // If line is "Items:", ignore it
-                    itemCount++;
+                    continue;
                 } else if (line.contains("+++")) { // If line is "+++", a new item object is coming
-                    itemCount++;
+                    continue;
                 } else { // Three steps: item name, item location, item description
 
                     if (itemStepCount == 0) { // ENTERING NAME
