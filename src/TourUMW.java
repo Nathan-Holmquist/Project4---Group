@@ -196,6 +196,8 @@ public class TourUMW {
             System.out.println("You can drop an item at a location with 'drop [item name]'\n");
 
             System.out.println("You can also just press the first letter of the command, so 'p [item name]' works too");
+            System.out.println("If at any point you want to no longer see what doors are available to you, type 'v' or 'verbose' to turn on verbose mode\n");
+            System.out.println("You can also type 'distance' to see the total amount of locations you have been to\n");
 
             System.out.println("You can move to a new location with n/s/e/w ");
             System.out.println("\n\n");
@@ -301,7 +303,6 @@ public class TourUMW {
         clearScreen();
         return new InvalidCommand(userLine);
     }
-
 
     /**
      * Clears the terminal so the user experience is better. 
