@@ -38,12 +38,16 @@ public class TourUMW {
 
         // Setting up campus
         Campus campus = tourUmw.setUpCampus(inputFileScanner);
+        
+
         tourStatus.setCampus(campus);
         tourStatus.setCurrentLocation(campus.getStartLocation());
 
+        campus = tourUmw.readSaveFile(saveFileScanner, campus);
+
 
         // Main user input loop
-        clearScreen(); // To get the file input text out of the terminal and start the tour.
+         // To get the file input text out of the terminal and start the tour.
         while (true){
         
             UserInputCommand command = TourUMW.promptUser(scanner, firstRun);
@@ -177,38 +181,47 @@ public class TourUMW {
         return campus;
     }
     
-    void readSaveFile(Scanner saveScanner){
+    public Campus readSaveFile(Scanner saveScanner, Campus campus){
 
         String line = saveScanner.nextLine();
         // SAVE FILE PART
 
         int saveStarCount = 0;
+        boolean locationSave = true;  // locationSave is true if the line the file is on should save the location that the line is so that future lines can reference it
         int locationPart = 0;
-        Location location;
+        Location location = null;
         TourStatus tourStatus = TourStatus.getInstance();
-        Campus campus = tourStatus.getCampus();
+        
 
         while(saveScanner.hasNextLine()){
             line = saveScanner.nextLine().toLowerCase(); // Remember, everything is lowercase, keep everything lowercase.
 
             if (line.contains("save file")) { // Skip save file declaration
-                ;
+                continue;
             } else if (line.contains("*****")) { // Stars mean switching to new object
+                locationSave = true;
                 saveStarCount++;
             } else if (line.contains("+++")) { // New object of same type
-                ;
+                locationSave = true;
+                continue;
+            } else if (line.contains("location states:")){
+                continue;
             } else { // Change the object's state depending on what it is
 
                 if (saveStarCount == 1){ // LOCATION STATES
-                    String locationNameSave = line;
-                    location = tourStatus.getCampus().getLocation(line);
 
+                    if (locationSave){
+                        System.out.println(line);
+                        location = tourStatus.getCampus().getLocation(line);
+                        locationSave = false;
+                    }
+                    
                     System.out.println(location.getHaveVisited());
                     
-                    if (line.startsWith("visited:")) {
-                        if (line.endsWith("true")){
-                            location.setVisited(true);
-                        }
+                    
+                    if (line.startsWith("visited:") && (line.endsWith("true")))  {
+                        System.out.println(line);
+                        location.setVisited(true);
                     } else if (line.startsWith("items:")){
                         ;
                     }
@@ -219,6 +232,8 @@ public class TourUMW {
             }
 
         }
+
+        return campus;
     }
 
 
