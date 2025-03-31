@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 
@@ -45,22 +46,21 @@ public class Campus {
         this.locations = new Hashtable<String,Location>();
         locationCount = 0;
     }
-
+    
     /**
-     * Used as a debugging tool to print all of the data from the campus object at any time.
+     * 
+     * THIS MAY BE TOTALLY WRONG
+     * 
+     * @return arraylist of location objects
      */
-    void printEverything() {
-        int count = 1; // human readability
-        for (Location location : this.locations.values()) {
-            System.out.println("Location #" + count + ": " + location.getName());
-            System.out.println(location.getDescription());
-            System.out.println(location.describeDoors());
-            count++;
-        }
+    public ArrayList<Location> getLocationList(){
+        System.out.println(this.locations.values());
+        return new ArrayList<Location>(this.locations.values());
+        
     }
 
 
-    
+
     /**
      * Add's location to hashtable with the key being the location.getName()
      * 

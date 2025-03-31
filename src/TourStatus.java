@@ -1,4 +1,6 @@
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *  This class keeps track of where you are on campus, it also keeps track of the backpack and the items inside it.

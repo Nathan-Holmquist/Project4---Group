@@ -12,39 +12,42 @@ import java.util.Scanner;
  */
 public class TourUMW {
     public static void main(String[] args) throws FileNotFoundException{
-        Scanner scanner = new Scanner(System.in);
-        File file;
+
+        File inputFile;
+        File saveFile;
 
         // File input loop
-        while (true) {
+        inputFile = new File("../data/newInputData.txt");
+        saveFile = new File("../data/saveInputData.txt");
 
-            file = new File("..\\data\\newInputData.txt"); // WINDOWS VERSION
-            // file = new File("../data/newInputData.txt"); // MAC/LINUX VERSION
-
-            if (!file.exists()){
-                System.out.println("File not found, please try again");
-                System.out.println("Current working directory: " + System.getProperty("user.dir"));
-                System.exit(-1);
-            } else {
-                break;
-            }
-
-        }
+        // Check if inputFile exists, if not, exit the program
+        if (!inputFile.exists()){
+            System.out.println("File not found, please try again");
+            System.out.println("Current working directory: " + System.getProperty("user.dir"));
+            System.exit(-1);
+        } 
+        
         
         // Object Creation
-        Scanner fileScanner = new Scanner(file);
+        Scanner scanner = new Scanner(System.in);
+        Scanner inputFileScanner = new Scanner(inputFile);
+        Scanner saveFileScanner = new Scanner(saveFile);
         TourStatus tourStatus = TourStatus.getInstance();
         TourUMW tourUmw = new TourUMW();
         boolean firstRun = true;
 
         // Setting up campus
-        Campus campus = tourUmw.setUpCampus(fileScanner);
+        Campus campus = tourUmw.setUpCampus(inputFileScanner);
+        
+
         tourStatus.setCampus(campus);
         tourStatus.setCurrentLocation(campus.getStartLocation());
 
+        campus = tourUmw.readSaveFile(saveFileScanner, campus);
+
 
         // Main user input loop
-        clearScreen(); // To get the file input text out of the terminal and start the tour.
+         // To get the file input text out of the terminal and start the tour.
         while (true){
         
             UserInputCommand command = TourUMW.promptUser(scanner, firstRun);
@@ -57,7 +60,8 @@ public class TourUMW {
     /**
      * This method parses the input file and creates a new "Campus" object complete with the information from the file
      * 
-     * @param fileScanner
+     * @param fileScanner input file scanner
+     * @param saveScanner save file scanner
      * @return campus
      * @throws FileNotFoundException
      */
@@ -177,6 +181,61 @@ public class TourUMW {
         return campus;
     }
     
+    public Campus readSaveFile(Scanner saveScanner, Campus campus){
+
+        String line = saveScanner.nextLine();
+        // SAVE FILE PART
+
+        int saveStarCount = 0;
+        boolean locationSave = true;  // locationSave is true if the line the file is on should save the location that the line is so that future lines can reference it
+        int locationPart = 0;
+        Location location = null;
+        TourStatus tourStatus = TourStatus.getInstance();
+        
+
+        while(saveScanner.hasNextLine()){
+            line = saveScanner.nextLine().toLowerCase(); // Remember, everything is lowercase, keep everything lowercase.
+
+            if (line.contains("save file")) { // Skip save file declaration
+                continue;
+            } else if (line.contains("*****")) { // Stars mean switching to new object
+                locationSave = true;
+                saveStarCount++;
+            } else if (line.contains("+++")) { // New object of same type
+                locationSave = true;
+                continue;
+            } else if (line.contains("location states:")){
+                continue;
+            } else { // Change the object's state depending on what it is
+
+                if (saveStarCount == 1){ // LOCATION STATES
+
+                    if (locationSave){
+                        System.out.println(line);
+                        location = tourStatus.getCampus().getLocation(line);
+                        locationSave = false;
+                    }
+                    
+                    System.out.println(location.getHaveVisited());
+                    
+                    
+                    if (line.startsWith("visited:") && (line.endsWith("true")))  {
+                        System.out.println(line);
+                        location.setVisited(true);
+                    } else if (line.startsWith("items:")){
+                        ;
+                    }
+
+                } else if (saveStarCount == 2){
+                    ;
+                }
+            }
+
+        }
+
+        return campus;
+    }
+
 
     /**
      * This method prompts the user for input and returns a command based on the input
@@ -330,5 +389,10 @@ public class TourUMW {
             e.printStackTrace();
         }
     }
-    
+
+
+
+
+
 }
+
