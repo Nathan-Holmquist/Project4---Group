@@ -18,8 +18,8 @@ public class TourUMW {
         // File input loop
         while (true) {
 
-            file = new File("..\\data\\newInputData.txt"); // WINDOWS VERSION
-            // file = new File("../data/newInputData.txt"); // MAC/LINUX VERSION
+            // file = new File("..\\data\\newInputData.txt"); // WINDOWS VERSION
+            file = new File("data/newInputData.txt"); // MAC/LINUX VERSION
 
             if (!file.exists()){
                 System.out.println("File not found, please try again");
@@ -28,9 +28,9 @@ public class TourUMW {
             } else {
                 break;
             }
-
         }
         
+
         // Object Creation
         Scanner fileScanner = new Scanner(file);
         TourStatus tourStatus = TourStatus.getInstance();
@@ -40,6 +40,7 @@ public class TourUMW {
         // Setting up campus
         Campus campus = tourUmw.setUpCampus(fileScanner);
         tourStatus.setCampus(campus);
+
         tourStatus.setCurrentLocation(campus.getStartLocation());
 
 

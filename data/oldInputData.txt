@@ -1,67 +1,61 @@
-
-Page
-1
-of 4
 University of Mary Washington
 *****
 Locations:
 Double Drive
-Welcome to the University of Mary Washington! You are
+Welcome to the University of Mary Washington! You are 
 currently at the main entrance for the school.
 +++
 James Farmer Hall
-This building is named after Dr. James Farmer and houses
-the Departments of Mathematics, Computer Science, CPR,
-Education and Asian Studies. It was built in 1941 and was
+This building is named after Dr. James Farmer and houses 
+the Departments of Mathematics, Computer Science, CPR, 
+Education and Asian Studies. It was built in 1941 and was 
 originally the library. An addition was completed in 1963.
 +++
 Campus Walk East
-This sidewalk winds through the entire campus leading
+This sidewalk winds through the entire campus leading 
 you to all other locations on campus.
 +++
 Bell Tower
-The tower houses a clock and is a monumental piece at UMW
+The tower houses a clock and is a monumental piece at UMW 
 built in 2007. The bell chimes twice a day at noon and 6pm.
 +++
 George Washington Hall
-This building has all administrators and human resources.
+This building has all administrators and human resources. 
 It was completed in 1939.
 +++
 Combs Hall
-Combs Hall contains the Department of English and Linguistics.
+Combs Hall contains the Department of English and Linguistics. 
 It was built in 1959.
 +++
 Campus Walk West
 This is the main thoroughfare for the west side of campus.
 +++
-Katora Coffee
-Located in the HCC, Katora Coffee will be offering sustainably
-sourced, locally roasted coffees, organic loose-leaf teas, and
-a plant-forward vegetarian and wellness-centered menu that
-includes gluten-free selections.
+For Five Coffee
+Located across from the HCC, For Five Coffee comes to UMW from New York. They
+offer coffees, teas, and a selection of sandwiches and pastries.
 +++
 Lee Hall
 Lee Hall houses the bookstore, student services and the health center.
 +++
 Bookstore
-The bookstore is for all at UMW. Students can find textbooks and
+The bookstore is for all at UMW. Students can find textbooks and 
 supplies. Everyone can find gear to represent our beloved school!
 +++
 Monroe Hall
-Monroe Hall is one of the three original buildings on campus. It was
-built in 1911. It houses the History, Geography, and Political
+Monroe Hall is one of the three original buildings on campus. It was 
+built in 1911. It houses the History, Geography, and Political 
 Science Departments.
 +++
 Monroe Fountain
-This fountain is central to the original three buildings of campus.
-Many students enjoy a refreshing feet dip in spring. You never
+This fountain is central to the original three buildings of campus. 
+Many students enjoy a refreshing feet dip in spring. You never 
 know what you might find walking by...towering bubbles?
 +++
 Simpson Library
-The library is in its second location on campus. It was built in 1987
-as a replacement to Trinkle (now James Farmer) Library. This library
-then had space for many student amenities including study spaces
-and larger book collections. If you need a quiet working space, visit
+The library is in its second location on campus. It was built in 1987 
+as a replacement to Trinkle (now James Farmer) Library. This library 
+then had space for many student amenities including study spaces 
+and larger book collections. If you need a quiet working space, visit 
 the treehouses on the third floor!
 +++
 *****
@@ -156,35 +150,25 @@ Monroe Fountain
 +++
 Simpson Library
 w
-Katora Coffee
+For Five Coffee
 +++
-Katora Coffee
+For Five Coffee
 e
 Simpson Library
 +++
 *****
 Items:
 coffee
-Katora Coffee
+For Five Coffee
 The latte of the day is a black raspberry mocha.
-drink[Transform(emptyCoffee)]:Ahhhh
 +++
-emptyCoffee
-none
-drink:You already enjoyed this coffee
-refill[Transform(coffee)]:More caffeine coming up
-recycle[Disappear]:Thank you for helping the environment!
-+++
-Pop Tart
-Katora Coffee
-Freshly made by Kickshaws. Vegan and gluten free!
-eat[Disappear]:Yummy!
+Donut
+For Five Coffee
+Freshly made by local Freddy Donuts!
 +++
 The Design of Everyday Things book
 Simpson Library
-The science of quality product design, why do we love some products, but are
-frustrated by others?
-read:Get your great mind working
+The science of quality product design, why do we love some products, but are frustrated by others?
 +++
 UMW baseball hat
 Bookstore
@@ -200,12 +184,10 @@ Enjoy reading!
 +++
 Linux laptop
 James Farmer Hall
-You can loan a linux laptop for your assignment this semester, and return it once
-you are done.
-open[Teleport]:Magically things can happen
+You can loan a linux laptop for your assignment this semester, and return it once you are done.
 +++
-scone
-Katora Coffee
+Scone
+For Five Coffee
 Today we are serving chocolate chip scones!
 +++
 *****
