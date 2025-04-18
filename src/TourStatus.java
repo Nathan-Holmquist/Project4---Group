@@ -14,6 +14,7 @@ public class TourStatus{
     private ArrayList<Item> backpack;
     private static TourStatus instance;     
     private int distance;
+    private ArrayList<Item> unplacedItems;
 
     /**
      * No param constructor for TourStatus
@@ -24,6 +25,21 @@ public class TourStatus{
         this.distance = 0;
     }
 
+
+    // This will be used for the transform command
+    public void addUnplacedItem(Item item){
+        this.unplacedItems.add(item);
+    }
+
+    public Item getUnplacedItem(String name){
+        for (Item item : this.unplacedItems){
+            if (item.getName().equals(name)){
+                return item;
+            }
+        }
+        
+        return null;
+    }
 
     /**
      * This method is used to add an item to the backpack

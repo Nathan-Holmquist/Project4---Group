@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 
@@ -23,6 +24,10 @@ public class Campus {
     private Location startingLocation;
 
     private int locationCount;
+
+    private ArrayList<Item> unplacedItems;
+
+    
     
 
     /**
@@ -30,6 +35,7 @@ public class Campus {
      */
     Campus(){
         this.locations = new Hashtable<String,Location>();
+        this.unplacedItems = new ArrayList<Item>();
         locationCount = 0;
     }
     
@@ -43,6 +49,7 @@ public class Campus {
         this.startingLocation = entry;
         this.campusName = name;
         this.locations = new Hashtable<String,Location>();
+        this.unplacedItems = new ArrayList<Item>();
         locationCount = 0;
     }
 
@@ -58,8 +65,6 @@ public class Campus {
             count++;
         }
     }
-
-
     
     /**
      * Add's location to hashtable with the key being the location.getName()
@@ -92,6 +97,7 @@ public class Campus {
         return locations.get(name); 
     }
     
+
     /**
      * Sets campusName
      * 

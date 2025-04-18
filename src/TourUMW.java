@@ -39,6 +39,7 @@ public class TourUMW {
 
         // Setting up campus
         Campus campus = tourUmw.setUpCampus(fileScanner);
+
         tourStatus.setCampus(campus);
 
         tourStatus.setCurrentLocation(campus.getStartLocation());
@@ -80,6 +81,10 @@ public class TourUMW {
         Item item = null;
         String doorLocationName = ""; // This is to keep track of the Location object that a door belongs to while in the door data in the input file
         String itemLocationName = "";
+        TourStatus tourStatus = TourStatus.getInstance(); 
+        boolean noneItem = false;
+        String commandName;
+        String commandMessage;
         // I need the array list to dynamically add Location objects. 
 
         while (fileScanner.hasNextLine()){
@@ -148,10 +153,13 @@ public class TourUMW {
                 }
 
             } else if (starCount == 3) { // Items
+
+                // TODO: if location is none, do some other shit
                 
                 if (line.contains("items:")) { // If line is "Items:", ignore it
                     continue;
                 } else if (line.contains("+++")) { // If line is "+++", a new item object is coming
+                    noneItem = false;
                     continue;
                 } else { // Three steps: item name, item location, item description
 
@@ -161,11 +169,46 @@ public class TourUMW {
                         itemStepCount++;
 
                     } else if (itemStepCount == 1) { // ADDING IT TO LOCATION
-                        currentLocation = campus.getLocation(line); // Location the item belongs to
-                        itemStepCount++;
+
+
+                        if (noneItem){
+
+                            // If line has [], it includes a command
+                            
+                            // If line has () it includes a paramater to that command
+
+                            // If line has [], after : is the message
+
+                            // If line has just : it is a phrase that can be typed in while the item is in the users backpack
+                            // and it will give a response
+
+
+
+                            if (line.contains("[")){
+                                commandName = line.substring(0, line.indexOf("["));
+                                commandMessage = line.substring(line.indexOf(":") + 1 , line.length());
+                                System.out.println("YER" + commandName + commandMessage);
+                                // item.setCommand(commandName);
+                            } 
+                        }
+
+                        
+                        if (line.equals("none")){
+                            tourStatus.addUnplacedItem(item);
+                            noneItem = true;
+                            continue;
+                        } else{
+                            System.out.println("Balls");
+                            currentLocation = campus.getLocation(line); // Location the item belongs to
+                            
+                            itemStepCount++;
+                        }
+                        
+                        
 
                     } else if (itemStepCount == 2) { // ADDING DESCRIPTION
                         item.setMessage(line);
+                        System.out.println(line);
                         currentLocation.addItem(item); // Directly add to the location
 
                         // Reset step counter for the next item
@@ -290,7 +333,7 @@ public class TourUMW {
             System.exit(0);
         }
 
-        if (userLine.equals("Verbose ") || userLine.equals("v")) {
+        if (userLine.equals("verbose ") || userLine.equals("v")) {
             clearScreen();
             return new VerboseCommand();
         }
