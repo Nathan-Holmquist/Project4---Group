@@ -154,7 +154,7 @@ public class TourUMW {
 
             } else if (starCount == 3) { // Items
 
-                // TODO: if location is none, do some other shit
+               
                 
                 if (line.contains("items:")) { // If line is "Items:", ignore it
                     continue;
@@ -170,49 +170,34 @@ public class TourUMW {
 
                     } else if (itemStepCount == 1) { // ADDING IT TO LOCATION
 
-
-                        if (noneItem){
-
-                            // If line has [], it includes a command
-                            
-                            // If line has () it includes a paramater to that command
-
-                            // If line has [], after : is the message
-
-                            // If line has just : it is a phrase that can be typed in while the item is in the users backpack
-                            // and it will give a response
-
-
-
-                            if (line.contains("[")){
-                                commandName = line.substring(0, line.indexOf("["));
-                                commandMessage = line.substring(line.indexOf(":") + 1 , line.length());
-                                System.out.println("YER" + commandName + commandMessage);
-                                // item.setCommand(commandName);
-                            } 
-                        }
-
-                        
+     
                         if (line.equals("none")){
                             tourStatus.addUnplacedItem(item);
                             noneItem = true;
+                            itemStepCount = 5; // Skip to the end of the loop the number is arbratrary
                             continue;
-                        } else{
-                            System.out.println("Balls");
-                            currentLocation = campus.getLocation(line); // Location the item belongs to
-                            
-                            itemStepCount++;
-                        }
-                        
-                        
+                        } 
 
+                        currentLocation = campus.getLocation(line); // Location the item belongs to
+                        itemStepCount++;
+                        
                     } else if (itemStepCount == 2) { // ADDING DESCRIPTION
                         item.setMessage(line);
                         System.out.println(line);
                         currentLocation.addItem(item); // Directly add to the location
+                        itemStepCount++;
 
-                        // Reset step counter for the next item
-                        itemStepCount = 0;
+                    } else {
+                        if (line.contains("[") && noneItem) {
+                            // This means the item is a command
+                            ItemCommand command = parseItemCommand(line);
+                            if (command != null) {
+                                item.addCommand(command);
+                            } else {
+                                System.out.println("Invalid command format: " + line);
+                            }
+                            continue;
+                        }
                     }
                 }
 
@@ -375,4 +360,40 @@ public class TourUMW {
         }
     }
     
+
+    public ItemCommand parseItemCommand(String line) {
+        String trigger;
+        String action = null;
+        String target = null;
+        String message;
+    
+        // Split the line at the first colon
+        if (!line.contains(":")) return null; // Invalid format
+    
+        String[] parts = line.split(":", 2); // Only split into 2 parts
+        trigger = parts[0].trim(); // Might be "drink" or "drink[Transform(emptyCoffee)]"
+        message = parts[1].trim();
+    
+        // Check if the trigger contains brackets, meaning it has an action and maybe a target
+        if (trigger.contains("[")) {
+            int openBracket = trigger.indexOf("[");
+            int closeBracket = trigger.indexOf("]");
+            String insideBrackets = trigger.substring(openBracket + 1, closeBracket);
+    
+            trigger = trigger.substring(0, openBracket); // Strip off the action bracket part
+    
+            if (insideBrackets.contains("(")) {
+                // Example: Transform(emptyCoffee)
+                int openParen = insideBrackets.indexOf("(");
+                int closeParen = insideBrackets.indexOf(")");
+                action = insideBrackets.substring(0, openParen);
+                target = insideBrackets.substring(openParen + 1, closeParen);
+            } else {
+                // Example: Disappear
+                action = insideBrackets;
+            }
+        }
+    
+        return new ItemCommand(trigger, action, target, message);
+    }
 }
