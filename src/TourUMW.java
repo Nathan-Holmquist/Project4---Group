@@ -17,8 +17,8 @@ public class TourUMW {
         // File input loop
         while (true) {
 
-            file = new File("data/newInputData.txt"); // WINDOWS VERSION
-            // file = new File("../data/newInputData.txt"); // MAC/LINUX VERSION
+            // file = new File("data\\newInputData.txt"); // WINDOWS VERSION
+            file = new File("data/newInputData.txt"); // MAC/LINUX VERSION
 
             if (!file.exists()){
                 System.out.println("File not found, please try again");
