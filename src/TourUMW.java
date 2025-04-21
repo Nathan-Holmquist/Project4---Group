@@ -41,6 +41,15 @@ public class TourUMW {
         Campus campus = tourUmw.setUpCampus(fileScanner);
         tourStatus.setCampus(campus);
         tourStatus.setCurrentLocation(campus.getStartLocation());
+        
+        System.out.println("Would you like to restore a previous save file? (yes/no)");
+        String response = scanner.nextLine().trim();
+        if (response.equals("yes") || response.equals("y")) {
+            TourStatus.getInstance().loadTour(campus);
+            System.out.println("Save file loaded! [Press Enter]");
+            scanner.nextLine(); 
+            clearScreen();
+        }
 
 
         // Main user input loop
@@ -49,8 +58,6 @@ public class TourUMW {
         
             UserInputCommand command = TourUMW.promptUser(scanner, firstRun);
             firstRun = false;
-            
-            System.out.println("Would you like to restore a previous file?");
 
         }
     }
@@ -234,6 +241,7 @@ public class TourUMW {
             System.out.println("Enter a command (n/s/e/w for movement, drop [item], pickup [item], backpack, q to quit): ");
             System.out.println();
             System.out.println("--------------------------------");
+            
         }
 
 
@@ -291,6 +299,13 @@ public class TourUMW {
     
         // Handle quitting
         if (userLine.equals("q") || userLine.equals("quit") || userLine.equals("exit")) {
+        	System.out.println("Would you like to save before quitting? (yes/no): ");
+        	String response = input.nextLine().trim();
+        	
+        	if (response.equals("yes")) {
+        		TourStatus.getInstance().saveTour();
+        	}
+        	
             System.out.println("Quitting the tour. Thanks for coming!");
             input.close();
             System.exit(0);
@@ -305,6 +320,7 @@ public class TourUMW {
             clearScreen();
             return new DistanceCommand();
         }
+       
         
         // If input is invalid, return an InvalidCommand
         clearScreen();
