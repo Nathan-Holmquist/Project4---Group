@@ -181,79 +181,81 @@ public class TourStatus{
         return this.distance;
     }
     	
-    	public void saveTour() {
-    		try {
-                PrintWriter write = new PrintWriter("save.txt");
-    	        TourStatus status = TourStatus.getInstance();
-    	        	
-    	        	System.out.println("Saving...");
-    	            write.println("Current Location: " + status.getCurrentLocation().getName());	//saves the current location and distance traveled
-    	            write.println("Current Distance: " + status.getDistance());
-    	            write.println("Rain status: " + status.rain);
-    	            write.println("Outdoor visit: " + status.outdoorVisit);
-    	
-    	            for (Item item : status.backpack) {			//this looks through the current backpack and saves everything in there
-    	                write.println("Item:" + item.getName());
-    	            }
+    public void saveTour() {
+        try {
+            PrintWriter write = new PrintWriter("save.txt");
+            TourStatus status = TourStatus.getInstance();
+                
+                System.out.println("Saving...");
+                write.println("Current Location: " + status.getCurrentLocation().getName());	//saves the current location and distance traveled
+                write.println("Current Distance: " + status.getDistance());
+                write.println("Rain status: " + status.rain);
+                write.println("Outdoor visit: " + status.outdoorVisit);
     
-    	            System.out.println("Tour saved!");		//Message to make sure the user saved
-    	            write.close();
-    	        } catch (Exception e) {
-    	            System.out.println("Couldn't save file");
-    	        }
-    		}
-    	
-    	public static void loadTour(Campus campus) {
-    		try {
-    	        Scanner scan = new Scanner(new File("save.txt"));
-    	        TourStatus status = TourStatus.getInstance();
-    	        
-    	        if (!scan.hasNextLine()) {	
-    	        	return;
-    	        }
-    	        
-    	        String locationLine = scan.nextLine();			//restores current location and replaces and sets it to that.
-    	        String currentLoc = locationLine.substring(18);
-    	        Location loc = campus.getLocation(currentLoc);
-    	   	        
-    	        status.setCurrentLocation(loc);
-    	        
-    	        if (!scan.hasNextLine()) {			//Goes to the next line
-    	        	return;
-    	        }
-    	        
-    	        String distanceLine = scan.nextLine();
-    	        int distance = Integer.parseInt(distanceLine.substring(17).trim());		//Reads in the distance BACK as an int and saves it now
-    	        status.distance = distance;
-    	        
-    	        while (scan.hasNextLine()) {
-    	        	String line = scan.nextLine();			//Reads in all the items	
-    	        	
-    	        	if (line.startsWith("Item: ")) {		//It skips the part where the file says the item prefix and 
-    	        		String itemName = line.substring(5);	//saves the part after it says it (hence the substring)
-    	        		Item item = new Item();
-    	        		item.setName(itemName);
-    	        		
-    	        		status.addToBackpack(item);			//adds everything back in the backpack.
-    	    
-    	        	}
-    	        	
-    	        	if (line.startsWith("Rain status: ")) {
-    	        		status.rain = Boolean.parseBoolean(line.substring(13).trim());
-    	        	}
-    	        	
-    	        	if (line.startsWith("Outdoor visit: ")) {
-    	        		status.outdoorVisit = Integer.parseInt(line.substring(15).trim());
-    	        
-    	        }
-    	    }    
-    	        
-    	        System.out.println("Tour loaded");
-    		} catch (FileNotFoundException e) {
-    			System.out.println("An error occured");
-    		} catch (NumberFormatException e) {
-    	        System.out.println("Error in number format while loading the tour.");
-    	    }
-    	}
-	}
+                for (Item item : status.backpack) {			//this looks through the current backpack and saves everything in there
+                    write.println("Item:" + item.getName());
+                }
+
+                System.out.println("Tour saved!");		//Message to make sure the user saved
+                write.close();
+            } catch (Exception e) {
+                System.out.println("Couldn't save file");
+            }
+        }
+    
+    public void loadTour(Campus campus) {
+        try {
+            Scanner scan = new Scanner(new File("data/save.txt"));
+            TourStatus status = TourStatus.getInstance();
+            
+            if (!scan.hasNextLine()) {	
+                scan.close();
+                return;
+            }
+            
+            String locationLine = scan.nextLine();			//restores current location and replaces and sets it to that.
+            String currentLoc = locationLine.substring(18);
+            Location loc = campus.getLocation(currentLoc);
+                
+            status.setCurrentLocation(loc);
+            
+            if (!scan.hasNextLine()) {			//Goes to the next line
+                scan.close();
+                return;
+            }
+            
+            String distanceLine = scan.nextLine();
+            int distance = Integer.parseInt(distanceLine.substring(17).trim());		//Reads in the distance BACK as an int and saves it now
+            status.distance = distance;
+            
+            while (scan.hasNextLine()) {
+                String line = scan.nextLine();			//Reads in all the items	
+                
+                if (line.startsWith("Item: ")) {		//It skips the part where the file says the item prefix and 
+                    String itemName = line.substring(5);	//saves the part after it says it (hence the substring)
+                    Item item = new Item();
+                    item.setName(itemName);
+                    
+                    status.addToBackpack(item);			//adds everything back in the backpack.
+        
+                }
+                
+                if (line.startsWith("Rain status: ")) {
+                    status.rain = Boolean.parseBoolean(line.substring(13).trim());
+                }
+                
+                if (line.startsWith("Outdoor visit: ")) {
+                    status.outdoorVisit = Integer.parseInt(line.substring(15).trim());
+            
+            }
+        }    
+            
+            System.out.println("Tour loaded");
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occured");
+        } catch (NumberFormatException e) {
+            System.out.println("Error in number format while loading the tour.");
+        }
+    }
+}
     	   

@@ -17,7 +17,7 @@ public class TourUMW {
         // File input loop
         while (true) {
 
-            file = new File("src/newInputData.txt"); // WINDOWS VERSION
+            file = new File("data/newInputData.txt"); // WINDOWS VERSION
             // file = new File("../data/newInputData.txt"); // MAC/LINUX VERSION
 
             if (!file.exists()){
@@ -45,6 +45,7 @@ public class TourUMW {
         System.out.println("Would you like to restore a previous save file? (yes/no)");
         String response = scanner.nextLine().trim();
         if (response.equals("yes") || response.equals("y")) {
+            firstRun = false;
             TourStatus.getInstance().loadTour(campus);
             System.out.println("Save file loaded! [Press Enter]");
             scanner.nextLine(); 
