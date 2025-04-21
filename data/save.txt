@@ -1,0 +1,4 @@
+Current Location: campus walk west
+Current Distance: 4
+Rain status: true
+Outdoor visit: 3
