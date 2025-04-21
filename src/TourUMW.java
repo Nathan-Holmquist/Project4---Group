@@ -18,8 +18,8 @@ public class TourUMW {
         // File input loop
         while (true) {
 
-            file = new File("..\\data\\newInputData.txt"); // WINDOWS VERSION
-            // file = new File("../data/newInputData.txt"); // MAC/LINUX VERSION
+            //file = new File("..\\data\\newInputData.txt"); // WINDOWS VERSION
+             file = new File("newInputData.txt"); // MAC/LINUX VERSION
 
             if (!file.exists()){
                 System.out.println("File not found, please try again");
@@ -63,6 +63,7 @@ public class TourUMW {
      */
     
     public Campus setUpCampus(Scanner fileScanner) throws FileNotFoundException{
+
 
         Campus campus = new Campus();
         String line;
@@ -132,19 +133,32 @@ public class TourUMW {
                     if (doorStepCount == 0){ // ENTERING LOCATION
                         currentLocation = campus.getLocation(line); // Location that the door should belong to
                         doorLocationName = line;
+
+                        //if(doorLocationName.equalsIgnoreCase())
+
                         door  = new Door(); // create new door object
                         door.setLeaving(currentLocation); // Set the entering location of the door
                         doorStepCount++;
                     } else if (doorStepCount == 1) { // DIRECTION
                         door.setDirection(line);
                         doorStepCount++;
-                    } else if (doorStepCount == 2) { // EXITING LOCATION
+                    } else if (doorStepCount == 2) { // EXITING LOCATION (is this the place
                         currentLocation = campus.getLocation(doorLocationName); // THE LOCATION THAT THE DOOR BELONGS TO (ENTERING LOCATION)
                         door.setEntering(campus.getLocation(line));
                         currentLocation.addDoor(door);
                         doorStepCount = 0;
                     }
                 }
+
+                //Get monroe hall door, and set it to LOCKED!
+
+
+
+
+                //Get combs hall door and set it to Locked
+
+
+
 
             } else if (starCount == 3) { // Items
                 
@@ -332,3 +346,4 @@ public class TourUMW {
     }
     
 }
+//C:\Users\monqu\OneDrive\Documents\Official Homework Folder\Computer Science\CPSC 240\Project4---Group

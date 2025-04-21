@@ -7,6 +7,7 @@ public class Door {
     private String direction;
     private Location leavingLocation;
     private Location enteringLocation;
+    private boolean isLocked = false;
 
     /**
      * No arg constructor
@@ -69,11 +70,20 @@ public class Door {
     void setEntering(Location enter){
         this.enteringLocation = enter;
     }
+
     /**
      * Sets direction
      * @param dir direction
      */
     void setDirection(String dir){
         this.direction = dir;
+    }
+
+    /**
+     * Sets locked
+     * @param enteredLocked locked
+     */
+    void setLockedState(boolean enteredLocked){
+        this.isLocked = enteredLocked;
     }
 }
