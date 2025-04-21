@@ -23,6 +23,7 @@ public class TourStatus{
         this.backpack = new ArrayList<Item>();
         this.isVerboseMode = false;
         this.distance = 0;
+        this.unplacedItems = new ArrayList<Item>();
     }
 
 
@@ -41,6 +42,17 @@ public class TourStatus{
         return null;
     }
 
+
+    public void printUnplacedItems(){
+        if (this.unplacedItems.isEmpty()){
+            System.out.println("There are no unplaced items.");
+        } else {
+            System.out.println("Unplaced items:");
+            for (Item item : this.unplacedItems){
+                System.out.println(item.getName());
+            }
+        }
+    }
     /**
      * This method is used to add an item to the backpack
      * @param item the item to be added to the backpack
@@ -79,7 +91,9 @@ public class TourStatus{
         return null;
     }
    
-
+    void removeItemFromBackpack(Item item){
+        this.backpack.remove(item);
+    }
     
     
     void setCurrentLocation (Location loc){
@@ -168,6 +182,10 @@ public class TourStatus{
         }
 
         return list;
+    }
+
+    public ArrayList<Item> getBackpack(){
+        return this.backpack;
     }
 
     void addToDistance(){

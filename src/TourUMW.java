@@ -51,6 +51,7 @@ public class TourUMW {
         
             UserInputCommand command = TourUMW.promptUser(scanner, firstRun);
             firstRun = false;
+            // tourStatus.printUnplacedItems();
 
         }
     }
@@ -153,13 +154,12 @@ public class TourUMW {
                 }
 
             } else if (starCount == 3) { // Items
-
-               
                 
                 if (line.contains("items:")) { // If line is "Items:", ignore it
                     continue;
                 } else if (line.contains("+++")) { // If line is "+++", a new item object is coming
                     noneItem = false;
+                    itemStepCount = 0;
                     continue;
                 } else { // Three steps: item name, item location, item description
 
@@ -183,16 +183,17 @@ public class TourUMW {
                         
                     } else if (itemStepCount == 2) { // ADDING DESCRIPTION
                         item.setMessage(line);
-                        System.out.println(line);
                         currentLocation.addItem(item); // Directly add to the location
                         itemStepCount++;
 
                     } else {
-                        if (line.contains("[") && noneItem) {
+                        if (line.contains("[")) {
                             // This means the item is a command
                             ItemCommand command = parseItemCommand(line);
+                            System.out.println("ELSE RAN");
                             if (command != null) {
                                 item.addCommand(command);
+                                System.out.println("Command added: " + command.getTrigger() + " to " + item.getName());
                             } else {
                                 System.out.println("Invalid command format: " + line);
                             }
@@ -327,6 +328,17 @@ public class TourUMW {
             clearScreen();
             return new DistanceCommand();
         }
+
+        for (Item item : tourStatus.getBackpack()) {
+            for (ItemCommand command : item.getCommands()) {
+                if (userLine.equalsIgnoreCase(command.getTrigger())) {
+                    clearScreen();
+                    return new ItemInputCommand(userLine);
+                }
+            }
+        }
+
+
         
         // If input is invalid, return an InvalidCommand
         clearScreen();

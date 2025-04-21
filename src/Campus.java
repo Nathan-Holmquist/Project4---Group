@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Random;
 
 
 /**
@@ -25,7 +26,9 @@ public class Campus {
 
     private int locationCount;
 
-    private ArrayList<Item> unplacedItems;
+    private ArrayList<Item> allItems;
+
+  
 
     
     
@@ -35,7 +38,7 @@ public class Campus {
      */
     Campus(){
         this.locations = new Hashtable<String,Location>();
-        this.unplacedItems = new ArrayList<Item>();
+        this.allItems = new ArrayList<Item>();
         locationCount = 0;
     }
     
@@ -49,7 +52,7 @@ public class Campus {
         this.startingLocation = entry;
         this.campusName = name;
         this.locations = new Hashtable<String,Location>();
-        this.unplacedItems = new ArrayList<Item>();
+        this.allItems = new ArrayList<Item>();
         locationCount = 0;
     }
 
@@ -97,36 +100,31 @@ public class Campus {
         return locations.get(name); 
     }
     
-
-    /**
-     * Sets campusName
-     * 
-     * @param campusName
-     */
-    void setCampusName(String campusName){
-        this.campusName = campusName;
+    public Location getRandomLocation() {
+        if (locations.isEmpty()) {
+            System.out.println("No locations available.");
+            return null;
+        }
+    
+        Random random = new Random();
+        int randomIndex = random.nextInt(locations.size());
+        String randomKey = (String) locations.keySet().toArray()[randomIndex];
+        return locations.get(randomKey);
     }
 
-    /**
-     * Gets campusName
-     * 
-     * @return campusName
-     */
-    String getCampusName(){
-        return this.campusName;
+    Item getItem(String name) {
+        for (Item item : this.allItems) {
+            if (item.getName().equals(name)) {
+                return item;
+            }
+        }
+        return null;
     }
-    /**
-     * Sets startingLocation
-     * @param start
-     */
-    void setStartLocation(Location start){
-        this.startingLocation = start;
-    }
-    /**
-     * Gets startingLocation
-     * @return location
-     */
-    Location getStartLocation(){
-        return this.startingLocation;
-    }
+
+    
+    void setCampusName(String campusName){this.campusName = campusName;}
+    String getCampusName(){return this.campusName;}
+    void setStartLocation(Location start){this.startingLocation = start;}
+    Location getStartLocation(){return this.startingLocation;}
+    
 }

@@ -9,14 +9,15 @@ public class Item {
 
     private String name;
     private String message;
-    private ArrayList<ItemCommand> commands = new ArrayList<>();
+    private ArrayList<ItemCommand> commands;
 
     /** 
      * Item constructor indicating the item class was made but has not had any data added to it
      */
     public Item() {
-        this.name = "DEFAULT NAME";
-        this.message = "DEFAULT MESSAGE";
+        this.name = "";
+        this.message = "";
+        this.commands = new ArrayList<ItemCommand>();
     }
 
     /** 
