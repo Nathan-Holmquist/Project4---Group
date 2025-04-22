@@ -43,6 +43,16 @@ public class TourUMW {
         tourStatus.setCurrentLocation(campus.getStartLocation());
 
 
+        System.out.println("Would you like to restore a previous save file? (yes/no)");
+        String response = scanner.nextLine().trim();
+        if (response.equals("yes") || response.equals("y")) {
+            firstRun = false;
+            TourStatus.getInstance().loadTour(campus);
+            System.out.println("Save file loaded! [Press Enter]");
+            scanner.nextLine(); 
+            clearScreen();
+        }
+        
         // Main user input loop
         clearScreen(); // To get the file input text out of the terminal and start the tour.
         while (true){
