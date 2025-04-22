@@ -183,7 +183,7 @@ public class TourStatus{
     	
     public void saveTour() {
         try {
-            PrintWriter write = new PrintWriter("save.txt");
+            PrintWriter write = new PrintWriter("data/save.txt");
             TourStatus status = TourStatus.getInstance();
                 
                 System.out.println("Saving...");
@@ -213,7 +213,7 @@ public class TourStatus{
                 return;
             }
             
-            String locationLine = scan.nextLine();			//restores current location and replaces and sets it to that.
+            String locationLine = scan.nextLine();			//restores curr ent location and replaces and sets it to that.
             String currentLoc = locationLine.substring(18);
             Location loc = campus.getLocation(currentLoc);
                 
@@ -231,12 +231,17 @@ public class TourStatus{
             while (scan.hasNextLine()) {
                 String line = scan.nextLine();			//Reads in all the items	
                 
-                if (line.startsWith("Item: ")) {		//It skips the part where the file says the item prefix and 
+                if (line.startsWith("Item:")) {		//It skips the part where the file says the item prefix and 
                     String itemName = line.substring(5);	//saves the part after it says it (hence the substring)
-                    Item item = new Item();
-                    item.setName(itemName);
                     
-                    status.addToBackpack(item);			//adds everything back in the backpack.
+                    for (Item item : campus.getAllItems()){
+                        if (item.getName().equals(itemName)) {	//checks if the item name is the same as the one in the backpack
+                            status.backpack.add(item);			//adds it to the backpack
+                            campus.getLocation(currentLoc).removeItem(item);	//removes it from the location
+                            break;
+                        }
+                    }
+                    
         
                 }
                 

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 
@@ -24,11 +25,13 @@ public class Campus {
 
     private int locationCount;
     
+    private ArrayList<Item> allItems;
 
     /**
      * No param constructor for campus object.
      */
     Campus(){
+        this.allItems = new ArrayList<Item>();
         this.locations = new Hashtable<String,Location>();
         locationCount = 0;
     }
@@ -40,6 +43,7 @@ public class Campus {
      * @param name campus name
      */
     Campus(Location entry, String name){
+        this.allItems = new ArrayList<Item>();
         this.startingLocation = entry;
         this.campusName = name;
         this.locations = new Hashtable<String,Location>();
@@ -122,5 +126,16 @@ public class Campus {
      */
     Location getStartLocation(){
         return this.startingLocation;
+    }
+
+    ArrayList<Item> getAllItems(){
+         
+
+        for (Location location : this.locations.values()){
+            for (Item item : location.getItems()){
+                allItems.add(item);
+            }
+        }
+        return allItems;
     }
 }

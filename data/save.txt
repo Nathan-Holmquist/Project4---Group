@@ -1,4 +1,7 @@
-Current Location: campus walk west
-Current Distance: 4
-Rain status: true
-Outdoor visit: 3
+Current Location: for five coffee
+Current Distance: 22
+Rain status: false
+Outdoor visit: 0
+Item:linux laptop
+Item:donut
+Item:coffee

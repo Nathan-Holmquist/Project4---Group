@@ -175,9 +175,6 @@ public class Location {
     }
     // returns the items array
     ArrayList<Item> getItems(){
-        if (this.items.isEmpty()){
-            System.out.println("SHITS EMPTY");
-        }
         return this.items;
     }
 
