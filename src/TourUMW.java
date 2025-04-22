@@ -51,7 +51,6 @@ public class TourUMW {
         
             UserInputCommand command = TourUMW.promptUser(scanner, firstRun);
             firstRun = false;
-            // tourStatus.printUnplacedItems();
 
         }
     }
@@ -81,11 +80,9 @@ public class TourUMW {
         Door door = null;
         Item item = null;
         String doorLocationName = ""; // This is to keep track of the Location object that a door belongs to while in the door data in the input file
-        String itemLocationName = "";
         TourStatus tourStatus = TourStatus.getInstance(); 
-        boolean noneItem = false;
-        String commandName;
-        String commandMessage;
+        
+
         // I need the array list to dynamically add Location objects. 
 
         while (fileScanner.hasNextLine()){
@@ -158,7 +155,6 @@ public class TourUMW {
                 if (line.contains("items:")) { // If line is "Items:", ignore it
                     continue;
                 } else if (line.contains("+++")) { // If line is "+++", a new item object is coming
-                    noneItem = false;
                     itemStepCount = 0;
                     continue;
                 } else { // Three steps: item name, item location, item description
@@ -173,7 +169,6 @@ public class TourUMW {
      
                         if (line.equals("none")){
                             tourStatus.addUnplacedItem(item);
-                            noneItem = true;
                             itemStepCount = 5; // Skip to the end of the loop the number is arbratrary
                             continue;
                         } 
