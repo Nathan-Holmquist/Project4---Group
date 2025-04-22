@@ -194,15 +194,15 @@ public class TourUMW {
 
                     } else if (itemStepCount == 1) { // ADDING IT TO LOCATION
 
-     
-                        if (line.equals("none")){
-                            tourStatus.addUnplacedItem(item);
+                        if (line.contains("none")){
+                            tourStatus.setUnplacedItem(item);
                             itemStepCount = 5; // Skip to the end of the loop the number is arbratrary
                             continue;
-                        } 
-
-                        currentLocation = campus.getLocation(line); // Location the item belongs to
-                        itemStepCount++;
+                        } else {
+                            currentLocation = campus.getLocation(line); // Location the item belongs to
+                            itemStepCount++;
+                            continue;
+                        }
                         
                     } else if (itemStepCount == 2) { // ADDING DESCRIPTION
                         item.setMessage(line);
@@ -213,10 +213,8 @@ public class TourUMW {
                         if (line.contains("[")) {
                             // This means the item is a command
                             ItemCommand command = parseItemCommand(line);
-                            System.out.println("ELSE RAN");
                             if (command != null) {
                                 item.addCommand(command);
-                                System.out.println("Command added: " + command.getTrigger() + " to " + item.getName());
                             } else {
                                 System.out.println("Invalid command format: " + line);
                             }

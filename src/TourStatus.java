@@ -18,7 +18,7 @@ public class TourStatus{
     private ArrayList<Item> backpack;
     private static TourStatus instance;     
     private int distance;
-    private ArrayList<Item> unplacedItems;
+    private Item unplacedItem;
     private int outdoorVisit;
     private boolean rain;
 
@@ -30,38 +30,21 @@ public class TourStatus{
         this.backpack = new ArrayList<Item>();
         this.isVerboseMode = false;
         this.distance = 0;
-        this.unplacedItems = new ArrayList<Item>();
         this.outdoorVisit = 0;
         this.rain = false;
     }
 
 
     // This will be used for the transform command
-    public void addUnplacedItem(Item item){
-        this.unplacedItems.add(item);
+    public void setUnplacedItem(Item item){
+        this.unplacedItem = item;
     }
 
-    public Item getUnplacedItem(String name){
-        for (Item item : this.unplacedItems){
-            if (item.getName().equals(name)){
-                return item;
-            }
-        }
-        
-        return null;
+    public Item getUnplacedItem(){
+        return this.unplacedItem;
     }
 
 
-    public void printUnplacedItems(){
-        if (this.unplacedItems.isEmpty()){
-            System.out.println("There are no unplaced items.");
-        } else {
-            System.out.println("Unplaced items:");
-            for (Item item : this.unplacedItems){
-                System.out.println(item.getName());
-            }
-        }
-    }
     /**
      * This method is used to add an item to the backpack
      * @param item the item to be added to the backpack

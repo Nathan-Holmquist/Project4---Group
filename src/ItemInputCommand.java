@@ -26,11 +26,12 @@ public class ItemInputCommand implements UserInputCommand{
 
                     if (command.getAction().equalsIgnoreCase("Transform")){
 
-                        Item unplacedItem = tourStatus.getUnplacedItem(command.getTarget());
-                        System.out.println(unplacedItem.getName() + unplacedItem.getMessage()+ unplacedItem.getCommands().toString());
+                        Item unplacedItem = tourStatus.getUnplacedItem();
+                        
 
                         tourStatus.addToBackpack(unplacedItem);
                         tourStatus.removeItemFromBackpack(item);
+                        tourStatus.setUnplacedItem(item);
                         response = command.getMessage() + "\n" + unplacedItem.getName() + " has been added to your backpack.";
 
                     
