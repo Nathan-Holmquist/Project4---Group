@@ -1,0 +1,6 @@
+Current Location: simpson library
+Current Distance: 5
+Rain status: false
+Outdoor visit: 0
+Item:the design of everyday things book
+Item:little brother book

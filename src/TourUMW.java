@@ -262,7 +262,7 @@ public class TourUMW {
         String itemName = null;
         
         String userLine = input.nextLine().trim().toLowerCase();
-        clearScreen();
+        
 
         
         // Handle movement commands
@@ -310,8 +310,15 @@ public class TourUMW {
     
         // Handle quitting
         if (userLine.equals("q") || userLine.equals("quit") || userLine.equals("exit")) {
-            System.out.println("Quitting the tour. Thanks for coming!");
+            
+            System.out.println("Would you like to save before quitting? (yes/no): ");
+        	String response = input.nextLine().trim();
+        	
+        	if (response.equals("yes")) {
+        		TourStatus.getInstance().saveTour();
+        	}
             input.close();
+            System.out.println("Quitting the tour. Thanks for coming!");
             System.exit(0);
         }
 
