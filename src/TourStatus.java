@@ -1,4 +1,8 @@
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 /**
  *  This class keeps track of where you are on campus, it also keeps track of the backpack and the items inside it.
@@ -15,6 +19,9 @@ public class TourStatus{
     private static TourStatus instance;     
     private int distance;
     private ArrayList<Item> unplacedItems;
+    private int outdoorVisit;
+    private boolean rain;
+
 
     /**
      * No param constructor for TourStatus
@@ -24,6 +31,8 @@ public class TourStatus{
         this.isVerboseMode = false;
         this.distance = 0;
         this.unplacedItems = new ArrayList<Item>();
+        this.outdoorVisit = 0;
+        this.rain = false;
     }
 
 
@@ -141,30 +150,6 @@ public class TourStatus{
 
 
     
-    /**
-     * Updates the tour location
-     * 
-     * Checks if user can go to a location that they specify, if they can't it tells them they can't
-     * if they can, it changes this.currentLocation to the location at the end of the door that they "went through"
-     * @param dir direction
-     */
-    void updateTourLocation (String dir){ // THIS IS WHAT TO WORK ON NEXT, Make sure this does what it's supposed to.
-        
-        if (this.campus.getLocation(this.currentLocationString) == null) {
-            System.out.println("Error: Current location is not set.");
-            return;
-        }
-        
-        if (this.campus.getLocation(this.currentLocationString).canYouGoThisWay(dir)){ // If there is a door where you are that leads to the direction you entered
-            
-            // System.out.println("Changed Current Location in Tour Status to : " + this.campus.getLocation(this.currentLocationString).goThisWay(dir).getName() );
-            setCurrentLocation(this.campus.getLocation(this.currentLocationString).goThisWay(dir)); // Sets current location to a location that is the end point of the door (moves you through the door)
-        } else { // User must have entered data wrong
-            System.out.println("You cannot go " + dir + " from here. Try a different direction.");
-        }
-    
-    }
-    
 
     /**
      * lists backpack items. I am not going into deeper detail. 
@@ -194,5 +179,120 @@ public class TourStatus{
     
     int getDistance(){
         return this.distance;
+    }
+
+    void updateTourLocation (String dir){ // THIS IS WHAT TO WORK ON NEXT, Make sure this does what it's supposed to.
+        
+    	TourStatus status = TourStatus.getInstance();
+        if (this.campus.getLocation(this.currentLocationString) == null) {
+            System.out.println("Error: Current location is not set.");
+            return;
+        }
+        
+        if (this.campus.getLocation(this.currentLocationString).canYouGoThisWay(dir)) { // If there is a door where you are that leads to the direction you entered
+        	Location newLoc = currentLocation.goThisWay(dir);
+        	setCurrentLocation(newLoc);
+        	
+        	if (newLoc.isOutside()) {
+        		status.outdoorVisit++;
+        	} else {
+        		status.outdoorVisit = 0;
+        	}
+        	
+        	if (status.outdoorVisit > 2) {
+        		status.rain = true;
+        		System.out.println("It is currently raining!");
+        	} else {
+        		status.rain = false;
+        	}
+    
+        } else {
+        	System.out.println("You cannot go this way!");
+        }
+    }
+    
+
+
+    	
+    public void saveTour() {
+        try {
+            PrintWriter write = new PrintWriter("data/save.txt");
+            TourStatus status = TourStatus.getInstance();
+                
+                System.out.println("Saving...");
+                write.println("Current Location: " + status.getCurrentLocation().getName());	//saves the current location and distance traveled
+                write.println("Current Distance: " + status.getDistance());
+                write.println("Rain status: " + status.rain);
+                write.println("Outdoor visit: " + status.outdoorVisit);
+    
+                for (Item item : status.backpack) {			//this looks through the current backpack and saves everything in there
+                    write.println("Item:" + item.getName());
+                }
+
+                System.out.println("Tour saved!");		//Message to make sure the user saved
+                write.close();
+            } catch (Exception e) {
+                System.out.println("Couldn't save file");
+            }
+        }
+    
+    public void loadTour(Campus campus) {
+        try {
+            Scanner scan = new Scanner(new File("data/save.txt"));
+            TourStatus status = TourStatus.getInstance();
+            
+            if (!scan.hasNextLine()) {	
+                scan.close();
+                return;
+            }
+            
+            String locationLine = scan.nextLine();			//restores curr ent location and replaces and sets it to that.
+            String currentLoc = locationLine.substring(18);
+            Location loc = campus.getLocation(currentLoc);
+                
+            status.setCurrentLocation(loc);
+            
+            if (!scan.hasNextLine()) {			//Goes to the next line
+                scan.close();
+                return;
+            }
+            
+            String distanceLine = scan.nextLine();
+            int distance = Integer.parseInt(distanceLine.substring(17).trim());		//Reads in the distance BACK as an int and saves it now
+            status.distance = distance;
+            
+            while (scan.hasNextLine()) {
+                String line = scan.nextLine();			//Reads in all the items	
+                
+                if (line.startsWith("Item:")) {		//It skips the part where the file says the item prefix and 
+                    String itemName = line.substring(5);	//saves the part after it says it (hence the substring)
+                    
+                    for (Item item : campus.getAllItems()){
+                        if (item.getName().equals(itemName)) {	//checks if the item name is the same as the one in the backpack
+                            status.backpack.add(item);			//adds it to the backpack
+                            campus.getLocation(currentLoc).removeItem(item);	//removes it from the location
+                            break;
+                        }
+                    }
+                    
+        
+                }
+                
+                if (line.startsWith("Rain status: ")) {
+                    status.rain = Boolean.parseBoolean(line.substring(13).trim());
+                }
+                
+                if (line.startsWith("Outdoor visit: ")) {
+                    status.outdoorVisit = Integer.parseInt(line.substring(15).trim());
+            
+            }
+        }    
+            
+            System.out.println("Tour loaded");
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occured");
+        } catch (NumberFormatException e) {
+            System.out.println("Error in number format while loading the tour.");
+        }
     }
 }

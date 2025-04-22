@@ -13,6 +13,8 @@ public class Location {
     private Boolean haveVisited;
     private ArrayList<Door> doors;
     private ArrayList<Item> items;
+    private boolean isRaining;
+    private boolean isOutside;
     
     /**
      * No arg constructor
@@ -23,6 +25,8 @@ public class Location {
         this.doors = new ArrayList<Door>();
         this.items = new ArrayList<Item>();
         this.haveVisited = false;
+        this.isRaining = false;
+        this.isOutside = false;
         
     }
     /**
@@ -163,11 +167,23 @@ public class Location {
     }
     // returns the items array
     ArrayList<Item> getItems(){
-        if (this.items.isEmpty()){
-            System.out.println("SHITS EMPTY");
-        }
         return this.items;
     }
 
+    boolean isOutside() {
+    	return this.isOutside;
+    }
+    
+    public void setIsOutside(boolean isOutside) {
+    	this.isOutside = isOutside;
+    }
+
+    boolean isRaining() {
+    	return this.isRaining;
+    }
+    
+    public void setIsRaining(boolean isRaining) {
+    	this.isRaining = isRaining;
+    }
 
 }

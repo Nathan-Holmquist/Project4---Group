@@ -27,10 +27,6 @@ public class Campus {
     private int locationCount;
 
     private ArrayList<Item> allItems;
-
-  
-
-    
     
 
     /**
@@ -50,6 +46,7 @@ public class Campus {
      */
     Campus(Location entry, String name){
         this.startingLocation = entry;
+        this.allItems = new ArrayList<Item>();
         this.campusName = name;
         this.locations = new Hashtable<String,Location>();
         this.allItems = new ArrayList<Item>();
@@ -121,10 +118,17 @@ public class Campus {
         return null;
     }
 
-    
     void setCampusName(String campusName){this.campusName = campusName;}
     String getCampusName(){return this.campusName;}
     void setStartLocation(Location start){this.startingLocation = start;}
     Location getStartLocation(){return this.startingLocation;}
     
+    ArrayList<Item> getAllItems(){
+        for (Location location : this.locations.values()){
+            for (Item item : location.getItems()){
+                allItems.add(item);
+            }
+        }
+        return allItems;
+    }
 }

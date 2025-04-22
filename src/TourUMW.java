@@ -18,8 +18,10 @@ public class TourUMW {
         // File input loop
         while (true) {
 
-            // file = new File("..\\data\\newInputData.txt"); // WINDOWS VERSION
-            file = new File("data/newInputData.txt"); // MAC/LINUX VERSION
+
+            //file = new File("..\\data\\newInputData.txt"); // WINDOWS VERSION
+             file = new File("data/newInputData.txt"); // MAC/LINUX VERSION
+
 
             if (!file.exists()){
                 System.out.println("File not found, please try again");
@@ -45,6 +47,16 @@ public class TourUMW {
         tourStatus.setCurrentLocation(campus.getStartLocation());
 
 
+        System.out.println("Would you like to restore a previous save file? (yes/no)");
+        String response = scanner.nextLine().trim();
+        if (response.equals("yes") || response.equals("y")) {
+            firstRun = false;
+            TourStatus.getInstance().loadTour(campus);
+            System.out.println("Save file loaded! [Press Enter]");
+            scanner.nextLine(); 
+            clearScreen();
+        }
+        
         // Main user input loop
         clearScreen(); // To get the file input text out of the terminal and start the tour.
         while (true){
@@ -53,6 +65,8 @@ public class TourUMW {
             firstRun = false;
 
         }
+
+        
     }
 
 
@@ -65,6 +79,7 @@ public class TourUMW {
      */
     
     public Campus setUpCampus(Scanner fileScanner) throws FileNotFoundException{
+
 
         Campus campus = new Campus();
         String line;
@@ -136,19 +151,32 @@ public class TourUMW {
                     if (doorStepCount == 0){ // ENTERING LOCATION
                         currentLocation = campus.getLocation(line); // Location that the door should belong to
                         doorLocationName = line;
+
+                        //if(doorLocationName.equalsIgnoreCase())
+
                         door  = new Door(); // create new door object
                         door.setLeaving(currentLocation); // Set the entering location of the door
                         doorStepCount++;
                     } else if (doorStepCount == 1) { // DIRECTION
                         door.setDirection(line);
                         doorStepCount++;
-                    } else if (doorStepCount == 2) { // EXITING LOCATION
+                    } else if (doorStepCount == 2) { // EXITING LOCATION (is this the place
                         currentLocation = campus.getLocation(doorLocationName); // THE LOCATION THAT THE DOOR BELONGS TO (ENTERING LOCATION)
                         door.setEntering(campus.getLocation(line));
                         currentLocation.addDoor(door);
                         doorStepCount = 0;
                     }
                 }
+
+                //Get monroe hall door, and set it to LOCKED!
+
+
+
+
+                //Get combs hall door and set it to Locked
+
+
+
 
             } else if (starCount == 3) { // Items
                 
@@ -261,7 +289,7 @@ public class TourUMW {
         String itemName = null;
         
         String userLine = input.nextLine().trim().toLowerCase();
-        clearScreen();
+        
 
         
         // Handle movement commands
@@ -309,8 +337,15 @@ public class TourUMW {
     
         // Handle quitting
         if (userLine.equals("q") || userLine.equals("quit") || userLine.equals("exit")) {
-            System.out.println("Quitting the tour. Thanks for coming!");
+            
+            System.out.println("Would you like to save before quitting? (yes/no): ");
+        	String response = input.nextLine().trim();
+        	
+        	if (response.equals("yes")) {
+        		TourStatus.getInstance().saveTour();
+        	}
             input.close();
+            System.out.println("Quitting the tour. Thanks for coming!");
             System.exit(0);
         }
 
