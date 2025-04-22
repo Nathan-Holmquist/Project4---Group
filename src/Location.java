@@ -21,7 +21,7 @@ public class Location {
      */
     Location(){
         this.name = "DEFAULT LOCATION NAME VALUE";
-        this.desc = "DEFAULT LOCATION DISCRIPTION VALUE";
+        this.desc = "DEFAULT LOCATION DESCRIPTION VALUE";
         this.doors = new ArrayList<Door>();
         this.items = new ArrayList<Item>();
         this.haveVisited = false;
@@ -105,8 +105,16 @@ public class Location {
     Location goThisWay(String dir){ // returns you the location that your cardinal direction points to
         this.haveVisited = true;
         for (Door door:this.doors){
-            if (door.getDirection().equals(dir)){
-                return door.getEntering();
+            if(door.getLocked() == false) {
+                if (door.getDirection().equals(dir)){
+                    return door.getEntering();
+                }
+            }
+            if(door.getLocked() == true) {
+                if (door.getDirection().equals(dir)){
+                    System.out.println("Doors Locked");
+                    return door.getLeaving();
+                }
             }
         }
         return null; // THERE WAS NO DOOR THAT COULD BE FOUND GOING IN THAT DIRECTION
