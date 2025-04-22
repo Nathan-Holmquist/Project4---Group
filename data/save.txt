@@ -1,6 +1,9 @@
-Current Location: simpson library
-Current Distance: 5
+Current Location: for five coffee
+Current Distance: 6
 Rain status: false
 Outdoor visit: 0
-Item:the design of everyday things book
 Item:little brother book
+Item:the design of everyday things book
+Item:coffee
+Item:donut
+Item:scone
