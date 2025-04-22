@@ -123,6 +123,8 @@ public class Campus {
                 allItems.add(item);
             }
         }
+        
+        allItems.add(TourStatus.getInstance().getUnplacedItem());
         return allItems;
     }
 }
