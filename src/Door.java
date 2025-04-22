@@ -56,6 +56,15 @@ public class Door {
     String getDirection(){
         return direction;
     }
+
+    /**
+     * Gets lockedState
+     * @return locked
+     */
+    boolean getLocked(){
+        return isLocked;
+    }
+
     /**
      * Sets leavingLocation
      * @param leave leavingLocation

@@ -30,6 +30,7 @@ public class MovementCommand implements UserInputCommand {
     @Override
     public String carryOut() {
 
+
         if (dir.equals("n")){
             tourStatus.updateTourLocation(dir);
             response = "you moved north";

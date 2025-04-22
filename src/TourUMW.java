@@ -108,6 +108,18 @@ public class TourUMW {
                         // Make new location object and fill it with a name and description. Then add it to the ArrayList of locations
                         Location location = new Location();
                         location.setName(locationName);
+
+                        //make key
+
+                        if(locationName.equalsIgnoreCase("For five coffee")){
+                        item = new Item();
+                        item.setName("Monroe Hall key");
+                        item.setMessage("Unlocks Monroe Hall");
+                        currentLocation.addItem(item); // Directly add to the location
+                             }
+
+                        //
+
                         campus.addLocation(location);
                         locations.add(location);
                         discription = true;
@@ -145,6 +157,18 @@ public class TourUMW {
                     } else if (doorStepCount == 2) { // EXITING LOCATION (is this the place
                         currentLocation = campus.getLocation(doorLocationName); // THE LOCATION THAT THE DOOR BELONGS TO (ENTERING LOCATION)
                         door.setEntering(campus.getLocation(line));
+
+                        //lock monroe hall door to
+                        if(door.getDirection().equals("n")){
+                            if(door.getEntering().getName().equalsIgnoreCase("Monroe Hall")){
+                                door.setLockedState(true);
+
+
+
+                            }
+                        }
+
+
                         currentLocation.addDoor(door);
                         doorStepCount = 0;
                     }
