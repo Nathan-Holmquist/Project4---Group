@@ -152,7 +152,7 @@ public class Location {
     // returns an item from the items array that matches the name passed in
     Item getItemNamed(String name){
         for (Item item:this.items){
-            if (item.getName().equals(name)){
+            if (item.getName().equalsIgnoreCase(name)){
                 return item;
             } 
         }
