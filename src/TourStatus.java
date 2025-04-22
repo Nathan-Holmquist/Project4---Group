@@ -17,6 +17,8 @@ public class TourStatus{
     private ArrayList<Item> backpack;
     private static TourStatus instance;     
     private int distance;
+    private int outdoorVisit;
+    private boolean rain;
 
     /**
      * No param constructor for TourStatus
@@ -25,6 +27,8 @@ public class TourStatus{
         this.backpack = new ArrayList<Item>();
         this.isVerboseMode = false;
         this.distance = 0;
+        this.outdoorVisit = 0;
+        this.rain = false;
     }
 
 
