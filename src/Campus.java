@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 
@@ -123,4 +124,6 @@ public class Campus {
     Location getStartLocation(){
         return this.startingLocation;
     }
+
+    
 }
