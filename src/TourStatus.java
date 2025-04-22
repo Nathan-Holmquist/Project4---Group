@@ -220,10 +220,10 @@ public class TourStatus{
             TourStatus status = TourStatus.getInstance();
                 
                 System.out.println("Saving...");
-                write.println("Current Location: " + status.getCurrentLocation().getName());	//saves the current location and distance traveled
-                write.println("Current Distance: " + status.getDistance());
-                write.println("Rain status: " + status.rain);
-                write.println("Outdoor visit: " + status.outdoorVisit);
+                write.println("Current Location:" + status.getCurrentLocation().getName());	//saves the current location and distance traveled
+                write.println("Current Distance:" + status.getDistance());
+                write.println("Rain status:" + status.rain);
+                write.println("Outdoor visit:" + status.outdoorVisit);
     
                 for (Item item : status.backpack) {			//this looks through the current backpack and saves everything in there
                     write.println("Item:" + item.getName());
@@ -247,7 +247,8 @@ public class TourStatus{
             }
             
             String locationLine = scan.nextLine();			//restores curr ent location and replaces and sets it to that.
-            String currentLoc = locationLine.substring(18);
+            String currentLoc = locationLine.substring(17);
+            System.out.println(locationLine.substring(17));
             Location loc = campus.getLocation(currentLoc);
                 
             status.setCurrentLocation(loc);

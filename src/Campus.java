@@ -88,13 +88,7 @@ public class Campus {
      * @return location
      */
     public Location getLocation(String name) {
-        if (name == null || name.trim().isEmpty()) { 
-            System.out.println("Invalid input: name is null or empty.");
-            return null;
-        }
-    
-        name = name.trim();
-        return locations.get(name); 
+        return this.locations.get(name); 
     }
     
     public Location getRandomLocation() {
