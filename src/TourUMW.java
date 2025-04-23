@@ -151,9 +151,11 @@ public class TourUMW {
                         currentLocation = locations.get(locations.size()-1);
                         
                         if (line.equalsIgnoreCase("indoor")){
-                            currentLocation.setRain(false);
+                            System.out.println("Indoor");
+                            currentLocation.setIsOutside(false);
                         } else if (line.equalsIgnoreCase("outdoor")){
-                            currentLocation.setRain(true);
+                            System.out.println("Outdoor");
+                            currentLocation.setIsOutside(true);
                         }
                         
                         outsideCheck = false;
@@ -305,6 +307,12 @@ public class TourUMW {
         } else {
             System.out.println("\n");
             System.out.println("Name: " + tourStatus.getCurrentLocation().getName() +"\n");
+            
+            if (tourStatus.getCurrentLocation().isOutside()){
+                System.out.println("It is raining.");
+            } else {
+                System.out.println("It is not raining");
+            }
                 
             System.out.println(tourStatus.getCurrentLocation().getDescription());
             System.out.println();

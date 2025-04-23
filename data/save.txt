@@ -1,7 +1,0 @@
-Current Location:katora coffee
-Current Distance:21
-Rain status:false
-Outdoor visit:0
-Item:monroe hall key
-Item:coffee
-Item:scone

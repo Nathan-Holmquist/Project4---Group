@@ -32,7 +32,7 @@ public class MovementCommand implements UserInputCommand {
     @Override
     public String carryOut() {
 
-        if (tourStatus.getOutdoorVisit() > 2){
+        if (tourStatus.getRain()){
             response = "It is raining.\n";
         }
 
