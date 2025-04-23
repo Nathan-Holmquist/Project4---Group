@@ -15,6 +15,7 @@ public class Location {
     private ArrayList<Item> items;
     private boolean isRaining;
     private boolean isOutside;
+    private TourStatus tourStatus;
     
     /**
      * No arg constructor
@@ -27,6 +28,7 @@ public class Location {
         this.haveVisited = false;
         this.isRaining = false;
         this.isOutside = false;
+        this.tourStatus = TourStatus.getInstance();
         
     }
     /**
@@ -41,6 +43,7 @@ public class Location {
         this.doors = new ArrayList<Door>();
         this.items = new ArrayList<Item>();
         this.haveVisited = false;
+        this.tourStatus = TourStatus.getInstance();
         
     }
 
@@ -112,6 +115,15 @@ public class Location {
             }
             if(door.getLocked() == true) {
                 if (door.getDirection().equals(dir)){
+                    for (Item item: tourStatus.getBackpack()){
+                        if (item.getName().contains("key")){
+                            System.out.println("You unlocked the door with the key");
+                            door.setLockedState(false);
+                            return door.getEntering();
+                        } else {
+                            System.out.println("The door is locked, you need a key to unlock it");
+                        }
+                    }
                     System.out.println("Doors Locked");
                     return door.getLeaving();
                 }
@@ -156,7 +168,7 @@ public class Location {
     // returns an item from the items array that matches the name passed in
     Item getItemNamed(String name){
         for (Item item:this.items){
-            if (item.getName().equals(name)){
+            if (item.getName().equalsIgnoreCase(name)){
                 return item;
             } 
         }

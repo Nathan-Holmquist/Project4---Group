@@ -1,7 +1,5 @@
 Current Location:katora coffee
-Current Distance:6
+Current Distance:16
 Rain status:false
 Outdoor visit:0
-Item:little brother book
-Item:pop tart
-Item:emptycoffee
+Item:monroe hall key

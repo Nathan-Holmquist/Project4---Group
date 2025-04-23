@@ -129,14 +129,13 @@ public class TourUMW {
 
                         //make key
 
-                        if(locationName.equalsIgnoreCase("For five coffee")){
-                        item = new Item();
-                        item.setName("Monroe Hall key");
-                        item.setMessage("Unlocks Monroe Hall");
-                        currentLocation.addItem(item); // Directly add to the location
-                             }
-
-                        //
+                        if(locationName.equalsIgnoreCase("katora coffee")){
+                            item = new Item();
+                            item.setName("monroe hall key");
+                            item.setMessage("Unlocks Monroe Hall");
+                            System.out.println("Current Location: " + currentLocation.getName());
+                            currentLocation.addItem(item); // Directly add to the location
+                        }
 
                         campus.addLocation(location);
                         locations.add(location);
@@ -180,9 +179,6 @@ public class TourUMW {
                         if(door.getDirection().equals("n")){
                             if(door.getEntering().getName().equalsIgnoreCase("Monroe Hall")){
                                 door.setLockedState(true);
-
-
-
                             }
                         }
 
