@@ -91,6 +91,22 @@ public class Location {
 
         return false;
     }
+
+    boolean lookForAndUpdateDoor(){ // True if there is a door in the ArrayList that is pointing in the direction
+        if (this.doors.isEmpty()){
+            System.out.println("SHITS ALSO EMPTY");
+        }
+        for(Door door:this.doors){
+            if (door.getLocked() == true){
+                door.setLockedState(false);
+                System.out.println("Door is unlocked");
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /**
      * Returns a location object that is the enteringLocation of the door. 
      * It gives you the location that the user is going to next (because at this point they have already typed a direction they wish to go)

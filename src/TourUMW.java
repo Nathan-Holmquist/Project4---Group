@@ -336,6 +336,20 @@ public class TourUMW {
             clearScreen();
             return new DistanceCommand();
         }
+
+        if (userLine.equalsIgnoreCase("use Monroe Hall key")){
+            if(tourStatus.listBackpackItems().contains("Monroe Hall key")){
+                if(tourStatus.getCurrentLocation().getName().equalsIgnoreCase("Monroe Fountain")){
+
+                    //clearScreen();
+                    //tourStatus.addToDistance();
+                    tourStatus.getCurrentLocation().lookForAndUpdateDoor();
+
+
+
+                }
+            }
+        }
         
         // If input is invalid, return an InvalidCommand
         clearScreen();
@@ -370,4 +384,3 @@ public class TourUMW {
     }
     
 }
-//C:\Users\monqu\OneDrive\Documents\Official Homework Folder\Computer Science\CPSC 240\Project4---Group
