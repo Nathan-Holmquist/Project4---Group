@@ -12,6 +12,8 @@ public class MovementCommand implements UserInputCommand {
     private String response;
 
 
+
+
     /**
      * Constructor
      * @param dir direction, n,s,e,w
@@ -30,22 +32,26 @@ public class MovementCommand implements UserInputCommand {
     @Override
     public String carryOut() {
 
+        if (tourStatus.getOutdoorVisit() > 2){
+            response = "It is raining.\n";
+        }
+
 
         if (dir.equals("n")){
             tourStatus.updateTourLocation(dir);
-            response = "you moved north";
+            response += "you moved north";
 
         } else if (dir.equals("s")){
             tourStatus.updateTourLocation(dir);
-            response = "you moved south";
+            response += "you moved south";
 
         } else if (dir.equals("e")){
             tourStatus.updateTourLocation(dir);
-            response = "you moved east";
+            response += "you moved east";
 
         } else if (dir.equals("w")){
             tourStatus.updateTourLocation(dir);
-            response = "you moved west";
+            response += "you moved west";
 
         } else {
             response = "Data entered was incorrect. Please only use n, s, e, w as input.";

@@ -52,6 +52,10 @@ public class TourStatus{
     void addToBackpack(Item item){
         this.backpack.add(item);
     }
+
+    int getOutdoorVisit(){
+        return this.outdoorVisit;
+    }
     /**
      * This method is used to drop an item from the backpack to the currentLocation
      * @param name the name of the item to be dropped
@@ -185,7 +189,6 @@ public class TourStatus{
         	
         	if (status.outdoorVisit > 2) {
         		status.rain = true;
-        		System.out.println("It is currently raining!");
         	} else {
         		status.rain = false;
         	}
@@ -195,6 +198,9 @@ public class TourStatus{
         }
     }
     
+    boolean getRain() {
+        	return this.rain;
+    }
 
 
     	

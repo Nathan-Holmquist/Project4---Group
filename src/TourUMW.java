@@ -96,6 +96,7 @@ public class TourUMW {
         Item item = null;
         String doorLocationName = ""; // This is to keep track of the Location object that a door belongs to while in the door data in the input file
         TourStatus tourStatus = TourStatus.getInstance(); 
+        boolean outsideCheck = false;
         
 
         // I need the array list to dynamically add Location objects. 
@@ -119,6 +120,7 @@ public class TourUMW {
                     locationCount++; 
                     discription = false;
                 } else {
+                    
                     if (!discription){ // if we are in NAME OF LOCATION mode
                         locationDesc = "";
                         locationName = line;
@@ -126,6 +128,7 @@ public class TourUMW {
                         // Make new location object and fill it with a name and description. Then add it to the ArrayList of locations
                         Location location = new Location();
                         location.setName(locationName);
+                        
 
                         //make key
 
@@ -139,17 +142,35 @@ public class TourUMW {
 
                         campus.addLocation(location);
                         locations.add(location);
+                        
+                        outsideCheck = true;
                         discription = true;
+                        
 
-                    }else { // if we are in DESCRIPTION mode
+                    } else if (outsideCheck){
+                        currentLocation = locations.get(locations.size()-1);
+                        
+                        if (line.equalsIgnoreCase("indoor")){
+                            currentLocation.setRain(false);
+                        } else if (line.equalsIgnoreCase("outdoor")){
+                            currentLocation.setRain(true);
+                        }
+                        
+                        outsideCheck = false;
+                        
+                        
+                        
+                    } else { // if we are in DESCRIPTION mode
                         // Get the location and then assign it the description
-                        currentLocation = locations.get(locationCount);
+                        currentLocation = locations.get(locations.size() -1);
                         locationDesc += line + "\n"; 
                         // Location can be multiple lines so we need to concatinate them 
                         // this will result in more calls to the object but I don't think thats really a problem rn
                         currentLocation.setDescription(locationDesc);
                         
                     }
+
+                    
                 }
             } else if (starCount == 2){ // Doors
 

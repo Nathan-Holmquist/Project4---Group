@@ -80,6 +80,11 @@ public class Location {
     void setDescription(String desc){
         this.desc = desc;
     }
+
+
+    void setRain(boolean isRaining){
+        this.isRaining = isRaining;
+    }
     /**
      * Returns true if there is a door that's direction is the same as the passed string
      * 
