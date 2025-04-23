@@ -174,6 +174,7 @@ public class TourStatus{
         
         if (this.campus.getLocation(this.currentLocationString).canYouGoThisWay(dir)) { // If there is a door where you are that leads to the direction you entered
         	Location newLoc = currentLocation.goThisWay(dir);
+
         	setCurrentLocation(newLoc);
         	
         	if (newLoc.isOutside()) {
