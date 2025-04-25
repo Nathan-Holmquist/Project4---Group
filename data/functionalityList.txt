@@ -4,9 +4,8 @@ it also has
 Locked Doors
 Weather
 Indoor/Outdoor locations
-Item Commands
 verbose command
-distance command
+
 
 
 When you use this, expand your terminal for a better viewing experience

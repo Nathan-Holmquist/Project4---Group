@@ -136,7 +136,6 @@ public class TourUMW {
                             item = new Item();
                             item.setName("monroe hall key");
                             item.setMessage("Unlocks Monroe Hall");
-                            
                             currentLocation.addItem(item); // Directly add to the location
                         }
 
