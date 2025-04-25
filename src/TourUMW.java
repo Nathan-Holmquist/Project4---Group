@@ -136,7 +136,7 @@ public class TourUMW {
                             item = new Item();
                             item.setName("monroe hall key");
                             item.setMessage("Unlocks Monroe Hall");
-                            System.out.println("Current Location: " + currentLocation.getName());
+                            
                             currentLocation.addItem(item); // Directly add to the location
                         }
 
@@ -151,10 +151,10 @@ public class TourUMW {
                         currentLocation = locations.get(locations.size()-1);
                         
                         if (line.equalsIgnoreCase("indoor")){
-                            System.out.println("Indoor");
+                            
                             currentLocation.setIsOutside(false);
                         } else if (line.equalsIgnoreCase("outdoor")){
-                            System.out.println("Outdoor");
+                            
                             currentLocation.setIsOutside(true);
                         }
                         

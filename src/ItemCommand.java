@@ -1,3 +1,7 @@
+/**
+ * Saves the command for an item.
+ * This command will live within the item class if an item has an item command
+ */
 public class ItemCommand {
     private String trigger; // like "drink" or "refill"
     private String action;  // like "Transform", "Disappear", etc.

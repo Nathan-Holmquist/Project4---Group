@@ -1,0 +1,42 @@
+This program has all required features 
+it also has
+
+Locked Doors
+Weather
+Indoor/Outdoor locations
+Item Commands
+verbose command
+distance command
+
+
+When you use this, expand your terminal for a better viewing experience
+
+The code in this project is made to execute in the directory of the project. So all file paths in the program are "data/*.txt"
+If the file can't be found, the program will give you an error and print where the program was executing. 
+
+Also the files are written for mac so they use / instead of \, next to the inputText file in the code is the windows version of the path in a comment
+
+In order to test all features, a user would start the game and say they they don't want to read in from a save file
+then, user would make their way to Campus Walk West ('n', 'w', 'w') . There they will find the monroe hall key.
+pickup the key using 'p monroe hall key' then make your way to monroe hall('w', 'n'). Without the key it doesn't let you in but with the key
+it unlocks the door until the user exits the game. 
+
+Make your way to katora coffee('s', 's', 'w'). Pickup the coffee item and type 'drink'. it will change into 'emptyCoffee' and you can check this by 
+opening your backpack with 'b'. From there you can either 'refill' and then 'drink' again or 'recycle'.
+
+If you travel to 4 'outdoor locations' in a row, it will start to rain and any time you travel it will say 'it is raining' before anything else
+your 'outdoor location count' resets when you go inside so it will stop raining\
+
+At any time you can save and then restart and it will save:
+Your current location
+If it is raining
+What your distance is
+How many outdoor locations you have visited in a row
+Your backpack contents
+
+to switch to verbose mode press v at any time
+
+to check your distance press d at any time
+
+
+

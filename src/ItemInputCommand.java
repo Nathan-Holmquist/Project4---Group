@@ -1,5 +1,12 @@
 import java.util.ArrayList;
 
+
+
+/**
+ * ItemInputCommand executes item commands. 
+ * @author Nathan Holmquist
+ * 
+ */
 public class ItemInputCommand implements UserInputCommand{
 
     private String line;
